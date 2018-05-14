@@ -1,0 +1,15 @@
+﻿@model IEnumerable<BachHoa.Models.LoaiHang>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@foreach(var loaihang in Model)
+{
+    <li>
+        <a href="@Url.Action("Details","BachHoa", new{id = loaihang.MSLH})">
+            @*img alt="@loaihang.TenLoaiHang" src="~/images/@loaihang.anhbia"/>*@
+            <span>@loaihang.TenLoaiHang </span>
+        </a>
+    </li>
+}
+

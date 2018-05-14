@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <!--[if IE 6]>
+    <link rel="stylesheet" type="text/css" href="iecss.css" />
+    <![endif]-->
+    <script type="text/javascript" src="~/Scripts/boxOver.js"></script>
+</head>
+<body>
+    <div id="main_container">
+        <div class="top_bar">
+            <div class="top_search">
+                <div class="search_text"><a href="http://all-free-download.com/free-website-templates/">Advanced Search</a></div>
+                <input type="text" class="search_input" name="search" />
+                <input type="image" src="~/images/search.gif" class="search_bt" />
+            </div>
+        </div>
+        <div id="header">         
+            <div class="oferte_content">
+                <div class="oferta">
+                    <div class="oferta_content">                                         
+                    </div>
+                </div>              
+            </div>
+            <!-- end of oferte_content-->
+        </div>
+        <div id="main_content">
+            <div id="menu_tab">
+                <div class="left_menu_corner"></div>
+                <ul class="menu">
+                    <li>
+                        @Html.ActionLink("Trang chủ","Index","Admin")
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        @Html.ActionLink("Quản lý mặt hàng","Mathang","Admin")
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        @Html.ActionLink("Quản lý loại hàng","LoaiHang","Admin")
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        @Html.ActionLink("Quản lý cửa hàng","CuaHang","Admin")
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        @Html.ActionLink("Quản lý nhân viên","NhanVien","Admin")
+                    </li>
+                </ul>
+            </div>
+
+            <div class="center_content">
+                <div class="prod_box">
+                    @RenderBody()
+                </div>
+            </div>
+            <!-- end of center content -->
+
+        </div>
+        <!-- end of main content -->
+        <div class="footer">
+            <div class="center_footer">
+                Template name. All Rights Reserved 2008<br />
+            </div>
+            <div class="right_footer"> <a href="http://all-free-download.com/free-website-templates/">home</a> <a href="http://all-free-download.com/free-website-templates/">about</a> <a href="http://all-free-download.com/free-website-templates/">sitemap</a> <a href="http://all-free-download.com/free-website-templates/">rss</a> <a href="contact.html">contact us</a> </div>
+        </div>
+    </div>
+    <!-- end of main_container -->
+
+</body>
+</html>
