@@ -1,0 +1,61 @@
+﻿@model BachHoa1.Models.NVPhuTrach
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="center_content">
+    <h2>Thông tin chi tiết nhân viên</h2>
+
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Họ Tên:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HoTen)
+            </dd>
+
+            <dt>
+                Phái:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Phai)
+            </dd>
+
+            <dt>
+                Ngày sinh:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NamSinh)
+            </dd>
+
+            <dt>
+                Địa chỉ:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+
+            <dt>
+                SĐT:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SDT)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.MSNV }) |
+        @Html.ActionLink("Quay lại", "Index")
+    </p>
+</div>

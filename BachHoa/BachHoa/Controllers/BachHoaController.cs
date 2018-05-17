@@ -16,7 +16,7 @@ namespace BachHoa.Controllers
         }
         public ActionResult Index()
         {
-            //Lấy 5 mặt hàng mới nhất
+            
             var mathangmoi = Laymathangmoi(8);
             return View(mathangmoi);
         }

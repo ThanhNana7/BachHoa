@@ -1,4 +1,5 @@
 ﻿@using BachHoa.Models
+
 @using PagedList.Mvc;
 @model PagedList.PagedList<BachHoa.Models.MatHang>
 
@@ -7,9 +8,8 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-
-<div class="center_content">
-    <h2 style="text-align: center">Quản lý thông tin mặt hàng</h2>
+<h2 style="text-align: center">Quản lý thông tin mặt hàng</h2>
+<div class="center_content">   
     <p>
         @Html.ActionLink("Thêm mới", "Themmoimathang")
     </p>
@@ -43,6 +43,9 @@
                 </td>
                 <td>
                     <img src="@Url.Content("~/HinhAnh/HinhAnh(MatHang)/"+item.HinhAnh)" style=" max-height:120px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayCapNhat)
                 </td>
                 <td>
                     @Html.ActionLink("Sửa", "Suamathang", new { id = item.MSMH }) |

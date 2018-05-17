@@ -1,0 +1,71 @@
+﻿@using PagedList.Mvc;
+@model PagedList.PagedList<BachHoa1.Models.CuaHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="center_content">
+    <h2 style="text-align: center">Quản lý thông tin cửa hàng</h2>
+    <p>
+        @Html.ActionLink("Thêm mới", "Create")
+    </p>
+    <table class="table table-bordered">
+        <tr class="info">
+            <th>
+                Tên cửa hàng:
+            </th>
+            <th>
+                Loại hàng:
+            </th>
+            <th>
+                Địa Chỉ:
+            </th>
+            <th>
+                SĐT:
+            </th>
+            <th>
+                Nhân viên phụ trách:
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenCH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoaiHang.TenLoaiHang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SDT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NVPhuTrach1.HoTen)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.MSCH }) |
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.MSCH }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.MSCH })
+                </td>
+            </tr>
+        }
+
+    </table>
+    @*Tạo liên kết các trang*@
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount;
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+    <style>
+        .MenuTrang li {
+            display: inline;
+        }
+    </style>
+</div>
