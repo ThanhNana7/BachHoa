@@ -40,9 +40,9 @@ namespace BachHoa1.Controllers
         }
         //public ActionResult Dangnhap(FormCollection collection)
         //{
-        //    var tendn = collection["TaiKhoan"];
+        //    var taikhoan = collection["TaiKhoan"];
         //    var matkhau = collection["MatKhau"];
-        //    if (String.IsNullOrEmpty(tendn))
+        //    if (String.IsNullOrEmpty(taikhoan))
         //    {
         //        ViewData["Loi1"] = "Vui lòng nhập tên đăng nhập";
         //    }
@@ -52,7 +52,7 @@ namespace BachHoa1.Controllers
         //    }
         //    else
         //    {
-        //        NVPhuTrach nv = data.NVPhuTraches.SingleOrDefault(n => n.TaiKhoan == tendn && n.MatKhau == matkhau);
+        //        NVPhuTrach nv = data.NVPhuTraches.SingleOrDefault(n => n.TaiKhoan == taikhoan && n.MatKhau == matkhau);
         //        if (nv != null)
         //        {
         //            ViewBag.Thongbao = "Đăng nhập thành công";

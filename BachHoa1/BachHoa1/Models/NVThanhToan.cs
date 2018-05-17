@@ -22,7 +22,9 @@ namespace BachHoa1.Models
         [StringLength(50)]
         public string HoTen { get; set; }
 
-        public bool Phai { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string Phai { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime NamSinh { get; set; }
@@ -33,6 +35,14 @@ namespace BachHoa1.Models
         [Required]
         [StringLength(12)]
         public string SDT { get; set; }
+
+        [Required]
+        [StringLength(10)]
+        public string TaiKhoan { get; set; }
+
+        [Required]
+        [StringLength(10)]
+        public string MatKhau { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuThanhToan> PhieuThanhToans { get; set; }

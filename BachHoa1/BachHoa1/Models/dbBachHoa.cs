@@ -8,11 +8,10 @@ namespace BachHoa1.Models
     public partial class dbBachHoa : DbContext
     {
         public dbBachHoa()
-            : base("name=dbBachHoa")
+            : base("name=dbBachHoa6")
         {
         }
 
-        public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<BaoCao> BaoCaos { get; set; }
         public virtual DbSet<CTPhieuGH> CTPhieuGHs { get; set; }
         public virtual DbSet<CTPhieuTT> CTPhieuTTs { get; set; }
@@ -27,14 +26,6 @@ namespace BachHoa1.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Admin>()
-                .Property(e => e.ID)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Admin>()
-                .Property(e => e.Pass)
-                .IsUnicode(false);
-
             modelBuilder.Entity<CuaHang>()
                 .Property(e => e.SDT)
                 .IsFixedLength()
@@ -66,6 +57,16 @@ namespace BachHoa1.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<NVPhuTrach>()
+                .Property(e => e.TaiKhoan)
+                .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NVPhuTrach>()
+                .Property(e => e.MatKhau)
+                .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<NVPhuTrach>()
                 .HasMany(e => e.CuaHangs)
                 .WithOptional(e => e.NVPhuTrach1)
                 .HasForeignKey(e => e.NvPhuTrach);
@@ -74,6 +75,14 @@ namespace BachHoa1.Models
                 .Property(e => e.SDT)
                 .IsFixedLength()
                 .IsUnicode(false);
+
+            modelBuilder.Entity<NVThanhToan>()
+                .Property(e => e.TaiKhoan)
+                .IsFixedLength();
+
+            modelBuilder.Entity<NVThanhToan>()
+                .Property(e => e.MatKhau)
+                .IsFixedLength();
 
             modelBuilder.Entity<NVThanhToan>()
                 .HasMany(e => e.PhieuThanhToans)
@@ -90,6 +99,11 @@ namespace BachHoa1.Models
                 .HasMany(e => e.CTPhieuTTs)
                 .WithRequired(e => e.PhieuThanhToan)
                 .WillCascadeOnDelete(false);
+        }
+
+        internal void SubmitChanges()
+        {
+            throw new NotImplementedException();
         }
     }
 }

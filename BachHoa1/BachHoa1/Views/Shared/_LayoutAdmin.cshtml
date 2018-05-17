@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>@ViewBag.Title</title>
+    <title>CỬA HÀNG BÁCH HÓA</title>
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
     <link href="~/Content/style.css" rel="stylesheet" />
     <!--[if IE 6]>
@@ -21,54 +21,65 @@
     <div id="main_container">
         <div class="top_bar">
             <div class="top_search">
-                <div class="search_text"><a href="http://all-free-download.com/free-website-templates/">Tìm kiếm</a></div>
+                <div class="search_text"><a>Tìm kiếm</a></div>
                 <input type="text" class="search_input" name="search" />
                 <input type="image" src="~/images/search.gif" class="search_bt" />
             </div>
-           
         </div>
         <div id="header">
-            @*<div id="logo"> <img src="~/images/vintage.png" alt="" border="0" width="237" height="140" /></a> </div>*@
             <div class="oferte_content">
-                @*<div class="top_divider"><img src="~/images/header_divider.png" alt="" width="1" height="164" /></div>*@
                 <div class="oferta">
                     <div class="oferta_content">
                         <img src="~/images/giohang.png" width="105" height="92" alt="" border="0" class="oferta_img" />
-                        </div>
+                        
+                            <div class="oferta_title">CỬA HÀNG BÁCH HÓA</div>
+                            <div class="oferta_text"> Chào mừng các bạn đến với Công ty Bách Hóa của chúng tôi. <br /> Chúc các bạn mua sắm vui vẻ </div>
+                            <a href="details.html" class="details">Chi tiết</a>
+                        
                     </div>
                 </div>
                 <div class="top_divider"><img src="~/images/header_divider.png" alt="" width="1" height="164" /></div>
             </div>
             <!-- end of oferte_content-->
+        </div>
+        <div id="main_content">
             <div id="menu_tab">
                 <ul class="menu">
-                    <li>@Html.ActionLink("Trang chủ", "Index", "BachHoa")</li>
+                    <li><a href="~/NVThanhToan/Index" class="nav1">Trang chủ</a></li>
                     <li class="divider"></li>
-                    <li>@Html.ActionLink("Quản lý mặt hàng", "Index", "MatHangs")</li>
+                    <li><a href="~/MatHangs/Index" class="nav2">Mặt hàng</a></li>
                     <li class="divider"></li>
-                    <li>@Html.ActionLink("Quản lý loại hàng", "Index", "LoaiHangs")</li>
+                    <li><a href="~/LoaiHangs/Index" class="nav2">Loại hàng</a></li>
                     <li class="divider"></li>
-                    <li>@Html.ActionLink("Quản lý cửa hàng", "Index", "CuaHangs")</li>
+                    <li><a href="~/CuaHangs/Index" class="nav2">Cửa hàng</a></li>
                     <li class="divider"></li>
-                    <li>@Html.ActionLink("Quản lý nhân viên", "Index", "NVPhuTraches")</li>
+                    <li><a href="~/NVPhuTraches/Index" class="nav2">Nhân Viên</a></li>
+                    <li class="divider"></li>
+                    <li><a href="" class="nav2">Tồn Kho</a></li>
+                    <li class="divider"></li>
+                    <li><a href="" class="nav2">Doanh thu</a></li>
+                    <li class="divider"></li>
+               
                 </ul>
-            </div>
-
+                <div class="right_menu_corner">
+                </div>
+            
             <div class="center_content">
                 <div class="prod_box">
                     @RenderBody()
                 </div>
             </div>
+        </div>
             <!-- end of center content -->
 
         </div>
-        <!-- end of main content -->
-        <div class="footer">
-            <div class="center_footer">
-                Template name. All Rights Reserved 2008<br />
-            </div>
-            <div class="right_footer"> <a href="http://all-free-download.com/free-website-templates/">home</a> <a href="http://all-free-download.com/free-website-templates/">about</a> <a href="http://all-free-download.com/free-website-templates/">sitemap</a> <a href="http://all-free-download.com/free-website-templates/">rss</a> <a href="contact.html">contact us</a> </div>
+    <!-- end of main content -->
+    <div class="footer">
+        <div class="center_footer">
+            Template name. All Rights Reserved 2008<br />
         </div>
+        <div class="right_footer"> <a href="http://all-free-download.com/free-website-templates/">home</a> <a href="http://all-free-download.com/free-website-templates/">about</a> <a href="http://all-free-download.com/free-website-templates/">sitemap</a> <a href="http://all-free-download.com/free-website-templates/">rss</a> <a href="contact.html">contact us</a> </div>
+    </div>
     </div>
     <!-- end of main_container -->
 

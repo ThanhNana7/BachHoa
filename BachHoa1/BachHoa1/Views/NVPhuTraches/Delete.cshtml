@@ -28,15 +28,15 @@
             </dd>
 
             <dt>
-                Ngày sinh:
+                Năm Sinh:
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.NamSinh)
+                @String.Format("{0:dd/MM/yyyy}", Model.NamSinh)
             </dd>
 
             <dt>
-                Địa chỉ:
+                Địa Chỉ:
             </dt>
 
             <dd>
@@ -44,11 +44,27 @@
             </dd>
 
             <dt>
-                SĐT:
+                SĐT
             </dt>
 
             <dd>
                 @Html.DisplayFor(model => model.SDT)
+            </dd>
+
+            <dt>
+                Tài Khoản:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TaiKhoan)
+            </dd>
+
+            <dt>
+                Mật khẩu:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MatKhau)
             </dd>
 
 

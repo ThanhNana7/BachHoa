@@ -5,9 +5,8 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-
 <div class="center_content">
-    <h2 style="text-align: center">Quản lý thông tin cửa hàng</h2>
+    <h2 style="text-align: center">Quản lý thông tin nhân viên</h2>
     <p>
         @Html.ActionLink("Thêm mới", "Create")
     </p>
@@ -23,10 +22,16 @@
                 Ngày sinh:
             </th>
             <th>
-                Địa Chỉ:
+                Địa chỉ:
             </th>
             <th>
                 SĐT:
+            </th>
+            <th>
+                Tài Khoản:
+            </th>
+            <th>
+                Mật khẩu:
             </th>
             <th></th>
         </tr>
@@ -48,6 +53,12 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SDT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaiKhoan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MatKhau)
                 </td>
                 <td>
                     @Html.ActionLink("Sửa", "Edit", new { id = item.MSNV }) |

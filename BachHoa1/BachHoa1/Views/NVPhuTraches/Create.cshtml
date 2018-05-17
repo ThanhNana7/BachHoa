@@ -4,15 +4,17 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <div class="center_content">
     <h2>Thêm mới nhân viên</h2>
 
-    @using (Html.BeginForm("Create", "NVPhuTrachs", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
             <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 <p class="control-label col-md-2">Họ Tên:</p>
                 <div class="col-md-10">
@@ -30,7 +32,7 @@
             </div>
 
             <div class="form-group">
-                <p class="control-label col-md-2">Ngày sinh:</p>
+                <p class="control-label col-md-2">Năm Sinh:</p>
                 <div class="col-md-10">
                     <input type="date" name="Namsinh" />
                     @Html.ValidationMessageFor(model => model.NamSinh)
@@ -50,6 +52,22 @@
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.SDT, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <p class="control-label col-md-2">Tài Khoản:</p>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TaiKhoan, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TaiKhoan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <p class="control-label col-md-2">Mật khẩu:</p>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
                 </div>
             </div>
 

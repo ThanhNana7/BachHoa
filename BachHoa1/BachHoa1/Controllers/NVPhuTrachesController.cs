@@ -51,7 +51,7 @@ namespace BachHoa1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "MSNV,HoTen,Phai,NamSinh,DiaChi,SDT")] NVPhuTrach nVPhuTrach)
+        public async Task<ActionResult> Create([Bind(Include = "MSNV,HoTen,Phai,NamSinh,DiaChi,SDT,TaiKhoan,MatKhau")] NVPhuTrach nVPhuTrach)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace BachHoa1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "MSNV,HoTen,Phai,NamSinh,DiaChi,SDT")] NVPhuTrach nVPhuTrach)
+        public async Task<ActionResult> Edit([Bind(Include = "MSNV,HoTen,Phai,NamSinh,DiaChi,SDT,TaiKhoan,MatKhau")] NVPhuTrach nVPhuTrach)
         {
             if (ModelState.IsValid)
             {
