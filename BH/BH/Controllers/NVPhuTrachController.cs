@@ -9,6 +9,7 @@ using PagedList;
 using PagedList.Mvc;
 using System.Net;
 using System.Data.Entity;
+using System.IO;
 
 namespace BH.Controllers
 {
@@ -19,17 +20,39 @@ namespace BH.Controllers
         //TRANG CHỦ
         public ActionResult Index()
         {
-            return View();
+            //return View();
+            if (Session["TaiKhoan"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Login");
+            }
         }
-
 
         //MATHANG
         // GET: MatHangs
-        public async Task<ActionResult> MatHang(int? page)
+        //public ActionResult MatHang()
+        //{  
+        //    return View();
+        //}
+        ////loaddata
+        //public ActionResult loaddata()
+        //{
+        //    using (dbBachHoa db = new dbBachHoa())
+        //    {
+        //        var data = db.MatHangs.OrderBy(a => a.MSMH).ToList();
+        //        return Json(new { data = data }, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
+        public async Task<ActionResult> MatHang()
         {
-            int pageNumber = (page ?? 1);
-            int pageSize = 7;
-            return View(db.MatHangs.ToList().OrderBy(n => n.MSMH).ToPagedList(pageNumber, pageSize));
+            //var mathang = from s in db.MatHangs where s.MSLH == id select s;
+            //select mh.MSMH, mh.TenHang, mh.DonGia, mh.SoLuong, mh.HinhAnh, mh.NgayCapNhat, mh.TrangThai
+            //from NVPhuTrach nv, CuaHang ch, MatHang mh, LoaiHang lh
+            //where nv.MSNV = ch.NvPhuTrach and ch.MSLH = lh.MSLH and lh.MSLH = mh.MSLH; 
+            return View(db.MatHangs.ToList());
         }
 
         // GET: MatHangs/Details/5
@@ -54,17 +77,33 @@ namespace BH.Controllers
         }
         // POST: MatHangs/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> MH_Them([Bind(Include = "MSMH,MSLH,TenHang,SoLuong,TrangThai,DonGia,HinhAnh,NgayCapNhat")] MatHang matHang)
+        [ValidateInput(false)]
+        public async Task<ActionResult> MH_Them(MatHang mh, HttpPostedFileBase fileupload)
         {
-            ViewBag.MSLH = new SelectList(db.LoaiHangs, "MSLH", "TenLoaiHang", matHang.MSLH);
-            if (ModelState.IsValid)
+            ViewBag.MSLH = new SelectList(db.LoaiHangs, "MSLH", "TenLoaiHang", mh.MSLH);
+            if (fileupload == null)
             {
-                db.MatHangs.Add(matHang);
-                await db.SaveChangesAsync();
+                ViewBag.ThongBao = "Vui lòng chọn ảnh";
+                return View();
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    var fileName = Path.GetFileName(fileupload.FileName);
+                    var path = Path.Combine(Server.MapPath("~/HinhAnh/HinhAnh(MatHang)"), fileName);
+                    if (System.IO.File.Exists(path))
+                        ViewBag.ThongBao = "Hình ảnh đã tồn tại";
+                    else
+                    {
+                        fileupload.SaveAs(path);
+                    }
+                    mh.HinhAnh = fileName;
+                    db.MatHangs.Add(mh);
+                    await db.SaveChangesAsync();
+                }
                 return RedirectToAction("MatHang");
             }
-            return View(matHang);
         }
         // GET: MatHangs/Edit/5
         public async Task<ActionResult> MH_Sua(int? id)
@@ -83,17 +122,41 @@ namespace BH.Controllers
         }
         // POST: MatHangs/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> MH_Sua([Bind(Include = "MSMH,MSLH,TenHang,SoLuong,TrangThai,DonGia,HinhAnh,NgayCapNhat")] MatHang matHang)
+        [ValidateInput(false)]
+        public async Task<ActionResult> MH_Sua(MatHang mh, HttpPostedFileBase fileUpload)
         {
-            if (ModelState.IsValid)
+            ViewBag.MSLH = new SelectList(db.LoaiHangs, "MSLH", "TenLoaiHang", mh.MSLH);
+            if (fileUpload == null)
             {
-                db.Entry(matHang).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("MatHang");
+                ViewBag.ThongBao = "Vui lòng chọn ảnh";
+                return View();
             }
-            ViewBag.MSLH = new SelectList(db.LoaiHangs, "MSLH", "TenLoaiHang", matHang.MSLH);
-            return View(matHang);
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    var fileName = Path.GetFileName(fileUpload.FileName);
+                    var path = Path.Combine(Server.MapPath("~/HinhAnh/HinhAnh(MatHang)"), fileName);
+                    if (System.IO.File.Exists(path))
+                    {
+                        ViewBag.ThongBao = "Hình ảnh đã tồn tại";
+                    }
+                    else
+                    {
+                        fileUpload.SaveAs(path);
+                    }
+                    MatHang mhh = db.MatHangs.Where(x => x.MSMH == mh.MSMH).Single<MatHang>();
+                    mhh.TenHang = mh.TenHang;
+                    mhh.MSLH = mh.MSLH;
+                    mhh.SoLuong = mh.SoLuong;
+                    mhh.TrangThai = mh.TrangThai;
+                    mhh.DonGia = mh.DonGia;
+                    mhh.HinhAnh = fileName;
+                    mhh.NgayCapNhat = mh.NgayCapNhat;
+                    await db.SaveChangesAsync();
+                }
+            }
+            return RedirectToAction("MatHang");
         }
         // GET: MatHangs/Delete/5
         public async Task<ActionResult> MH_Xoa(int? id)
@@ -122,9 +185,111 @@ namespace BH.Controllers
         }
 
         //PHIEUGIAO
-        public ActionResult PhieuGiao()
+        // GET: CTPhieuGHs
+        public async Task<ActionResult> PhieuGiao()
         {
+            var cTPhieuGHs = db.CTPhieuGHs.Include(c => c.MatHang).Include(c => c.PhieuGiaoHang);
+            return View(await cTPhieuGHs.ToListAsync());
+        }
+        
+
+        // GET: CTPhieuGHs/Details/5
+        public async Task<ActionResult> PG_ChiTiet(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CTPhieuGH cTPhieuGH = await db.CTPhieuGHs.FindAsync(id);
+            if (cTPhieuGH == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cTPhieuGH);
+        }
+
+        // GET: CTPhieuGHs/Create
+        public ActionResult PG_Them()
+        {
+            ViewBag.MSMH = new SelectList(db.MatHangs, "MSMH", "TenHang");
+            ViewBag.SOPG = new SelectList(db.PhieuGiaoHangs, "SOPG", "TrangThai");
             return View();
+        }
+
+        // POST: CTPhieuGHs/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> PG_Them([Bind(Include = "SOCTPG,SOPG,MSMH,SoLuongGiao,DonGia,ThanhTien")] CTPhieuGH cTPhieuGH)
+        {
+            if (ModelState.IsValid)
+            {
+                db.CTPhieuGHs.Add(cTPhieuGH);
+                await db.SaveChangesAsync();
+                return RedirectToAction("PhieuGiao");
+            }
+
+            ViewBag.MSMH = new SelectList(db.MatHangs, "MSMH", "TenHang", cTPhieuGH.MSMH);
+            ViewBag.SOPG = new SelectList(db.PhieuGiaoHangs, "SOPG", "TrangThai", cTPhieuGH.SOPG);
+            return View(cTPhieuGH);
+        }
+
+        // GET: CTPhieuGHs/Edit/5
+        public async Task<ActionResult> PG_Sua(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CTPhieuGH cTPhieuGH = await db.CTPhieuGHs.FindAsync(id);
+            if (cTPhieuGH == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.MSMH = new SelectList(db.MatHangs, "MSMH", "TenHang", cTPhieuGH.MSMH);
+            ViewBag.SOPG = new SelectList(db.PhieuGiaoHangs, "SOPG", "TrangThai", cTPhieuGH.SOPG);
+            return View(cTPhieuGH);
+        }
+
+        // POST: CTPhieuGHs/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> PG_Sua([Bind(Include = "SOCTPG,SOPG,MSMH,SoLuongGiao,DonGia,ThanhTien")] CTPhieuGH cTPhieuGH)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(cTPhieuGH).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("PhieuGiao");
+            }
+            ViewBag.MSMH = new SelectList(db.MatHangs, "MSMH", "TenHang", cTPhieuGH.MSMH);
+            ViewBag.SOPG = new SelectList(db.PhieuGiaoHangs, "SOPG", "TrangThai", cTPhieuGH.SOPG);
+            return View(cTPhieuGH);
+        }
+
+        // GET: CTPhieuGHs/Delete/5
+        public async Task<ActionResult> PG_Xoa(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CTPhieuGH cTPhieuGH = await db.CTPhieuGHs.FindAsync(id);
+            if (cTPhieuGH == null)
+            {
+                return HttpNotFound();
+            }
+            return View(cTPhieuGH);
+        }
+
+        // POST: CTPhieuGHs/Delete/5
+        [HttpPost, ActionName("PG_Xoa")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> PG_XoaConfirmed(int id)
+        {
+            CTPhieuGH cTPhieuGH = await db.CTPhieuGHs.FindAsync(id);
+            db.CTPhieuGHs.Remove(cTPhieuGH);
+            await db.SaveChangesAsync();
+            return RedirectToAction("PhieuGiao");
         }
 
         //BAOCAO
@@ -136,9 +301,15 @@ namespace BH.Controllers
         //TAIKHOAN
         public ActionResult TaiKhoan()
         {
-            return View();
+            if (Session["TaiKhoan"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "NVPhuTrach");
+            }
         }
-
 
 
         protected override void Dispose(bool disposing)

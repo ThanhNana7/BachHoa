@@ -218,6 +218,8 @@ namespace BH.Controllers
             dbBachHoa db = new dbBachHoa();
             var tendn = collection["TaiKhoan"];
             var matkhau = collection["MatKhau"];
+
+            KhachHang kh = db.KhachHangs.SingleOrDefault(n => n.TaiKhoang == tendn && n.MatKhau == matkhau);
             if (String.IsNullOrEmpty(tendn))
             {
                 ViewData["Coloi"] = "Vui lòng nhập tên tài khoản";
@@ -227,11 +229,10 @@ namespace BH.Controllers
                 ViewData["Coloi1"] = "Vui lòng nhập mật khẩu";
             }
             else
-            {
-                KhachHang nv = db.KhachHangs.SingleOrDefault(n => n.TaiKhoang == tendn && n.MatKhau == matkhau);
-                if (nv != null)
+            {               
+                if (kh != null)
                 {
-                    Session["TaiKhoan"] = nv;
+                    Session["TaiKhoan"] = kh;
                     return RedirectToAction("Index", "Home");
                 }
                 else

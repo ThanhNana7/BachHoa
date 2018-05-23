@@ -9,14 +9,8 @@ namespace BH.Models
     [Table("CTPhieuGH")]
     public partial class CTPhieuGH
     {
-        [Key]
-        [Column(Order = 0)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SOPG { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int MSMH { get; set; }
 
         public int? SoLuongGiao { get; set; }
@@ -24,6 +18,9 @@ namespace BH.Models
         public double? DonGia { get; set; }
 
         public double? ThanhTien { get; set; }
+
+        [Key]
+        public int SOCTPG { get; set; }
 
         public virtual MatHang MatHang { get; set; }
 

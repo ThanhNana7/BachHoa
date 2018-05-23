@@ -8,7 +8,7 @@ namespace BH.Models
     public partial class dbBachHoa : DbContext
     {
         public dbBachHoa()
-            : base("name=dbBachHoa1")
+            : base("name=dbBachHoa4")
         {
         }
 
@@ -40,6 +40,11 @@ namespace BH.Models
 
             modelBuilder.Entity<KhachHang>()
                 .Property(e => e.MatKhau)
+                .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<KhachHang>()
+                .Property(e => e.SDT)
                 .IsFixedLength()
                 .IsUnicode(false);
 

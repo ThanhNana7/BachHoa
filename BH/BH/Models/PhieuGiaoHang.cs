@@ -32,5 +32,7 @@ namespace BH.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTPhieuGH> CTPhieuGHs { get; set; }
+
+        public virtual NVPhuTrach NVPhuTrach { get; set; }
     }
 }

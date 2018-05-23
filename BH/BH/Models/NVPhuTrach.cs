@@ -13,6 +13,7 @@ namespace BH.Models
         public NVPhuTrach()
         {
             CuaHangs = new HashSet<CuaHang>();
+            PhieuGiaoHangs = new HashSet<PhieuGiaoHang>();
         }
 
         [Key]
@@ -43,5 +44,8 @@ namespace BH.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CuaHang> CuaHangs { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PhieuGiaoHang> PhieuGiaoHangs { get; set; }
     }
 }

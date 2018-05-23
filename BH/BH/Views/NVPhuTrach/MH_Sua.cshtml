@@ -7,12 +7,14 @@
 <div class="center_content">
     <h2>Sửa mặt hàng</h2>
 
-    @using (Html.BeginForm("MH_Sua", "MatHang", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("MH_Sua", "NVPhuTrach", FormMethod.Post, new { @enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
             <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.MSMH)
             <div class="form-group">
                 <p class="control-label col-md-2">Tên Hàng:</p>
                 <div class="col-md-10">
@@ -49,7 +51,7 @@
             <div class="form-group">
                 <p class="control-label col-md-2">Hình Ảnh:</p>
                 <div class="col-md-10">
-                    <input type="file" name="HinhAnh" />
+                    <input type="file" name="fileupload" />
                     @ViewBag.Thongbao
                 </div>
             </div>

@@ -2,5 +2,11 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutNVThanhToan.cshtml";
 }
-<h2 class="center_content">CHÀO MỪNG!</h2>
-
+<div class="center_content">
+    @if (Session["HoTen"] != null)
+    {
+        <text>
+            <h3> Chào mừng @Session["HoTen"].ToString()!</h3>
+        </text>
+    }
+</div>

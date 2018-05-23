@@ -12,7 +12,6 @@ namespace BH.Models
         public int? MSMH { get; set; }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int MSBC { get; set; }
 
         [Column(TypeName = "date")]
