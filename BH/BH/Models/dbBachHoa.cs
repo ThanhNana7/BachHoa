@@ -8,7 +8,7 @@ namespace BH.Models
     public partial class dbBachHoa : DbContext
     {
         public dbBachHoa()
-            : base("name=dbBachHoa4")
+            : base("name=dbBachHoa5")
         {
         }
 

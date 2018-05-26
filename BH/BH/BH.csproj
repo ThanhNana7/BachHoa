@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -197,10 +200,11 @@
     <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\TonKho.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RP\RP.Designer.cs">
+    <Compile Include="RP\KhoHangRP.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RP.xsd</DependentUpon>
+      <DependentUpon>KhoHangRP.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -380,17 +384,6 @@
     <Content Include="Content\scss\style.scss" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="login\scss\style.scss" />
-    <Content Include="RP\RP.xsc">
-      <DependentUpon>RP.xsd</DependentUpon>
-    </Content>
-    <None Include="RP\RP.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>RP.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="RP\RP.xss">
-      <DependentUpon>RP.xsd</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\boxOver.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -490,7 +483,6 @@
     <Content Include="Views\NVThanhToan\PT_Them.cshtml" />
     <Content Include="Views\NVThanhToan\Pt_Sua.cshtml" />
     <Content Include="Views\NVThanhToan\PT_Xoa.cshtml" />
-    <Content Include="Views\Shared\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -503,7 +495,14 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="RP\TonKho.rdlc" />
+    <EmbeddedResource Include="RP\KhoHangRP.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>KhoHangRP.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

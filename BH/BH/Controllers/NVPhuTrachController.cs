@@ -10,6 +10,8 @@ using PagedList.Mvc;
 using System.Net;
 using System.Data.Entity;
 using System.IO;
+using BH.RP;
+using CrystalDecisions.CrystalReports.Engine;
 
 namespace BH.Controllers
 {
@@ -295,7 +297,26 @@ namespace BH.Controllers
         //BAOCAO
         public ActionResult BaoCao()
         {
+            ViewBag.ListMatHang = db.MatHangs.ToList();
             return View();
+        }
+        public ActionResult InBaoCao()
+        {
+            List<MatHang> allmh = new List<MatHang>();
+            allmh = db.MatHangs.ToList();
+
+
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/RP"), "KhoHangRP.rpt"));
+
+            rd.SetDataSource(allmh);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders(); 
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+            return File(stream, "application/pdf", "ListMatHang.pdf");
         }
 
         //TAIKHOAN
